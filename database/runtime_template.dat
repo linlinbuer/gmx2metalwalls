@@ -1,0 +1,130 @@
+# Check run
+# =========
+# SPC/E water -- NIST configuration 1
+
+# Global parameters
+num_steps       40000000
+timestep        82.862
+temperature     298
+
+# Velocity
+velocity
+ create True
+  scale global 1
+
+# Box
+# ---
+num_pbc  2
+
+# Thermostat
+# ----------
+thermostat
+    relaxation_time 10000
+    max_iteration   50
+    tolerance       1.0e-17
+    chain_length    5
+
+# Species definition
+# ---------------
+
+species 
+
+    species_type
+      name        O
+      count      {n_water}
+      charge  point -0.8476
+      mobile True
+      mass   15.9994
+
+    species_type
+      name H1
+      count     {n_water}
+      charge point 0.4238
+      mobile True
+      mass 1.008
+
+    species_type
+      name H2
+      count     {n_water}
+      charge point 0.4238
+      mobile True
+      mass 1.008
+
+    {species_solute_section}
+    {species_ion_section}
+    
+    species_type
+      name Au1                         # name of the species
+      count {n_Au1}                      # number of species 
+      mass 196.966553                 # mass in amu
+      mobile False
+      charge gaussian 0.3187 0.0 # wall charge eta
+
+    species_type
+      name Au2                         # name of the species
+      count {n_Au2}                      # number of species 
+      mass 196.966553                      # mass in amu
+      mobile False
+      charge gaussian 0.3187 0.0 # wall charge eta
+
+molecules 
+   molecule_type 
+      name SPC
+      count    {n_water}
+      sites O H1 H2
+
+      constraint O   H1   1.88972
+      constraint O   H2   1.88972
+      constraint H1  H2   3.08587
+
+      constraints_algorithm rattle 1.0e-7 100 
+      
+      {molecule_solute_section}
+      {intra_section}
+
+# Electrode species definition
+# ----------------------
+electrodes
+
+  electrode_type
+    name       Au1
+    species    Au1
+    potential  0.00
+    piston     3.443861840114266e-09   +1.0
+
+  electrode_type
+    name       Au2
+    species    Au2
+    potential  0.00   # fixed potential 1V = -0.03674932379085202 ua
+    piston     3.443861840114266e-09   -1.0
+
+  electrode_charges cg 1.0e-6 100
+#  electrode_charges  matrix_inversion   # fastest but does not work with piston
+  charge_neutrality true
+
+interactions
+  coulomb
+    coulomb_rtol       2.0e-5
+    coulomb_rcut       22.68
+    coulomb_ktol       1.0e-6
+
+  lennard-jones
+    lj_rcut 22.3459
+    lj_pair O  O  0.6502 3.166       # epsilon in kJ/mol, sigma in angstrom 
+    {lj_solute_section}
+    {lj_ion_section}
+    lj_pair Au1 Au1 22.13336 2.951
+    lj_pair Au2 Au2 22.13336 2.951
+    lj_rule Lorentz_Berthelot 
+
+output
+  default 1000
+  step 500
+  charges 500
+  total_charges 1000
+  restart 1 alternate
+  elec_forces 1000
+  density 1000 100
+  xyz    500
+  pdb    0
+  lammps 0

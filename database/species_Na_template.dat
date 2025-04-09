@@ -1,0 +1,6 @@
+species_type 
+	name 	 NA
+	count 	 {n_ion} 
+	charge  point 	 +0.94 
+	mobile True 
+	mass 	 22.98977  

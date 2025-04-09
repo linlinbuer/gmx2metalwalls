@@ -1,0 +1,12 @@
+[Ion Type Number]
+ion_type_num = 2
+
+[Ion Type Information]
+ion_type1 = NA
+ion_type2 = CL
+
+[Solute Information]
+solute_type = 
+
+[Charge Rescale Factor]
+charge_rescale = 0.94

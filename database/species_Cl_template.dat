@@ -1,0 +1,6 @@
+species_type 
+  name 	 Cl
+  count 	 {n_ion} 
+  charge  point 	 -0.94 
+  mobile True 
+  mass 	 35.453
