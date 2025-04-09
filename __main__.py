@@ -29,13 +29,6 @@ def main():
     
     if args.config:
         process_conversion(args.config, data_dir/'gold_au.xyz', 'data.inpt')
-    else: 
-	    print('gimme a gro file after -c')
-    
-    if args.input:
-	    print('good job')
-    else:
-	    print('gimme a input.dat file (copy from program folder) after -f')
 
     topology_converter.main()
 
