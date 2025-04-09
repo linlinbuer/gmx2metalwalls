@@ -19,11 +19,6 @@ def main():
     script_dir = Path(__file__).resolve().parent
     data_dir = script_dir / 'database'
 
-    # src_input = script_dir / 'database' / 'input.dat'
-    # dst_input = Path.cwd() / 'input.dat'
-
-    # # Copy the file
-    # shutil.copy2(src_input, dst_input)
     
     args = parse_args()  # Get command-line arguments
     
