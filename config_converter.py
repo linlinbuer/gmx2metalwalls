@@ -130,7 +130,6 @@ def process_conversion(gro_file, xyz_file, output_file):
 
 
 def count(gro_file, xyz_file):
-    """Main function to process conversion from GROMACS to MetalWalls format."""
     u, u_gold = load_system(gro_file, xyz_file)
     water = u.select_atoms('resname SOL')
     solute = u.select_atoms(f'resname {solute_name}')
